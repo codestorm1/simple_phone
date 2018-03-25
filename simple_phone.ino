@@ -3,10 +3,7 @@
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
-//#include <Adafruit_TFTLCD.h> // Hardware-specific library
 #include <Fonts/FreeMonoBoldOblique12pt7b.h>
-//#include <Fonts/FreeSerif9pt7b.h>
-//#include <Fonts/FreeMono18pt7b.h>
 #include <Fonts/Arial8pt.h>
 #include <Adafruit_SSD1306.h>
 Adafruit_SSD1306 display = Adafruit_SSD1306();
@@ -103,14 +100,10 @@ void show_dialing(int curPhone) {
 }
 
 int decEntry(int curPhone) {
-  int temp = curPhone > 0 ? curPhone - 1 : num_entries - 1;
-  Serial.println(temp);
   return curPhone > 0 ? curPhone - 1 : num_entries - 1;
 }
 
 int incEntry(int curPhone) {
-  int temp = curPhone < num_entries - 1 ? curPhone + 1 : 0;
-  Serial.println(temp);
   return curPhone < num_entries - 1 ? curPhone + 1 : 0;
 }
 
@@ -149,8 +142,6 @@ void loop() {
   if (!digitalRead(BUTTON_A)) { 
     cur_status = browsing;
     currentPhone = decEntry(currentPhone);
-    Serial.print("Current phone: ");
-    Serial.println(currentPhone);
   }
 
   if (!digitalRead(BUTTON_B)) {
@@ -160,8 +151,6 @@ void loop() {
   if (!digitalRead(BUTTON_C)) { 
     cur_status = browsing;
     currentPhone = incEntry(currentPhone);
-    Serial.print("Current phone: ");
-    Serial.println(currentPhone);
   }
   switch (cur_status) {
     case browsing:
@@ -173,6 +162,5 @@ void loop() {
   }
   delay(10);
   yield();
-  display.display();
 }
 
