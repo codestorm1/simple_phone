@@ -1,0 +1,19 @@
+
+find fonts:
+system_profiler SPFontsDataType | grep ".ttf"
+
+use fontconvert:
+./fontconvert /Library/Fonts/Arial.ttf 7 > ../Fonts/Arial7pt.h
+
+Adding fonts:
+https://github.com/caskroom/homebrew-fonts
+$ brew tap caskroom/fonts                  # you only have to do this once!
+$ brew cask install font-inconsolata
+
+
+Todo:
+solder mic and speaker
+case
+
+Add phone Library
+actually dial and hang up

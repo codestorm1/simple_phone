@@ -4,8 +4,10 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Fonts/FreeMonoBoldOblique12pt7b.h>
+#include <Fonts/Arial7pt.h>
 #include <Fonts/Arial8pt.h>
 #include <Adafruit_SSD1306.h>
+
 Adafruit_SSD1306 display = Adafruit_SSD1306();
 
 #if defined(ESP8266)
@@ -72,7 +74,8 @@ void show_entries(int curPhone) {
   if (curPhone < 1) {
     curPhone == 1;
   }
-  
+
+  display.setFont(&Arial8pt7b);
   display.clearDisplay();
   display.setTextColor(WHITE);
   display.setCursor(0,0);
@@ -85,15 +88,14 @@ void show_entries(int curPhone) {
 
   display.setCursor(0,0);
   display.display(); // actually display all of the above
-  
 }
 
 void show_dialing(int curPhone) {
+  display.setFont(&Arial7pt7b);
   display.clearDisplay();
   display.setTextColor(WHITE);
-  display.setCursor(0,0);
-  display.println();
-  display.print("Dialing ");
+  display.setCursor(0, 10);
+  display.println("Dialing: ");
   display.println(entries[currentPhone].phone);
   display.setCursor(0,0);
   display.display(); // actually display all of the above
@@ -122,7 +124,7 @@ void setup() {
   display.display();
   delay(1000);
 
-  display.setFont(&Arial8pt7b);
+  display.setFont(&Arial7pt7b);
 
 //  display.setFont();
   // Clear the buffer.
@@ -152,6 +154,7 @@ void loop() {
     cur_status = browsing;
     currentPhone = incEntry(currentPhone);
   }
+  
   switch (cur_status) {
     case browsing:
       show_entries(currentPhone);
@@ -160,7 +163,8 @@ void loop() {
       show_dialing(currentPhone);
       break;
   }
-  delay(10);
+  
+  delay(100);
   yield();
 }
 
